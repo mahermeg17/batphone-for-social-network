@@ -203,4 +203,10 @@ public class FlipCursor implements Cursor {
     public Bundle respond(Bundle bundle) {
         return internal.respond(bundle);
     }
+
+	@Override
+	public int getType(int arg0) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
