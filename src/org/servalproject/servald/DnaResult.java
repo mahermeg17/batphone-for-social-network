@@ -15,6 +15,7 @@ public class DnaResult implements IPeer {
 	public boolean local = true;
 	public String did;
 	public String name;
+	String profileData;
 	public final Uri uri;
 
 	public DnaResult(Uri uri) throws InvalidHexException,
@@ -81,6 +82,18 @@ public class DnaResult implements IPeer {
 			return peer.getContactId();
 		else
 			return Long.MAX_VALUE;
+	}
+
+	@Override
+	public boolean hasProfileData() {
+		return (profileData != null && !profileData.equals(""));
+
+	}
+
+	@Override
+	public String getProfileData() {
+		// TODO Auto-generated method stub
+		return profileData;
 	}
 
 	@Override

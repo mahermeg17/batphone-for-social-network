@@ -1,6 +1,5 @@
 package org.servalproject.servald;
 
-
 import android.content.Context;
 import android.content.OperationApplicationException;
 import android.os.RemoteException;
@@ -19,4 +18,8 @@ public interface IPeer {
 	public String getSortString();
 
 	public String getDid();
+
+	public boolean hasProfileData();
+
+	public String getProfileData();
 }

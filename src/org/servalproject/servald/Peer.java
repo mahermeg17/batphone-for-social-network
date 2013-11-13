@@ -39,6 +39,7 @@ public class Peer implements IPeer {
 	// did / name resolved from looking up the sid
 	public String did;
 	public String name;
+	public String profileData;
 
 	// every peer must have a sid
 	Peer(SubscriberId sid) {
@@ -66,6 +67,10 @@ public class Peer implements IPeer {
 				|| (name != null && !name.equals(""));
 	}
 
+	@Override
+	public boolean hasProfileData() {
+		return (profileData != null && !profileData.equals(""));
+	}
 	public String getContactName() {
 		if (contactName != null && !contactName.equals(""))
 			return contactName;
@@ -148,5 +153,11 @@ public class Peer implements IPeer {
 					context, getContactName(), sid,
 					did);
 		}
+	}
+
+	@Override
+	public String getProfileData() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

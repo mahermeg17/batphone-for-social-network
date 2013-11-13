@@ -16,14 +16,18 @@ public class Identity {
 	private String name;
 	private String did;
 	private boolean main;
+	private String profileData = "profile data";
 
 	private static List<Identity> identities;
 
-	public static Identity createIdentity() throws InvalidHexException, ServalDFailureException {
-		ServalD.KeyringAddResult result = ServalD.keyringAdd(); // TODO provide identity PIN
+	public static Identity createIdentity() throws InvalidHexException,
+			ServalDFailureException {
+		ServalD.KeyringAddResult result = ServalD.keyringAdd(); // TODO provide
+																// identity PIN
 		Identity id = new Identity(result.subscriberId);
 		id.did = result.did;
 		id.name = result.name;
+		id.profileData = result.profileData;
 		id.main = Identity.identities.size() == 0;
 		Identity.identities.add(id);
 		return id;
@@ -35,15 +39,15 @@ public class Identity {
 			try {
 				// TODO provide list of unlock PINs
 				ServalD.KeyringListResult result = ServalD.keyringList();
-				for (ServalD.KeyringListResult.Entry ent: result.entries) {
+				for (ServalD.KeyringListResult.Entry ent : result.entries) {
 					Identity id = new Identity(ent.subscriberId);
 					id.did = ent.did;
 					id.name = ent.name;
+					id.profileData = ent.profileData;
 					id.main = identities.size() == 0;
 					identities.add(id);
 				}
-			}
-			catch (ServalDFailureException e) {
+			} catch (ServalDFailureException e) {
 				Log.e("Identities", e.toString(), e);
 			}
 		}
@@ -66,10 +70,19 @@ public class Identity {
 	}
 
 	public String getDid() {
-		return did;
+		return did == null ? "" : did;
 	}
 
-	public void setDetails(Context context, String did, String name)
+	public String getProfileData() {
+		return profileData == null ? "" : profileData;
+	}
+
+	public void setProfileData(String profileData) {
+		this.profileData = profileData;
+	}
+
+	public void setDetails(Context context, String did, String name,
+			String profileData)
 			throws ServalDFailureException {
 
 		if (did == null || !did.matches("[0-9+*#]{5,31}"))
@@ -80,9 +93,12 @@ public class Identity {
 			throw new IllegalArgumentException(
 					"That number cannot be dialed as it will be redirected to a cellular emergency service.");
 
-		ServalD.KeyringAddResult result = ServalD.keyringSetDidName(this.subscriberId, did == null ? "" : did, name == null ? "" : name);
+		ServalD.KeyringAddResult result = ServalD.keyringSetDidName(
+				this.subscriberId, did == null ? "" : did, name == null ? ""
+						: name, profileData == null ? "" : profileData);
 		this.did = result.did;
 		this.name = result.name;
+		this.profileData = result.profileData;
 
 		Control.reloadConfig();
 
@@ -101,7 +117,8 @@ public class Identity {
 
 	@Override
 	public String toString() {
-		return this.subscriberId.toString() + " " + did + " " + name;
+		return this.subscriberId.toString() + " " + did + " " + name + " "
+				+ profileData;
 	}
 
 }

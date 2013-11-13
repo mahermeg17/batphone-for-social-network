@@ -96,10 +96,10 @@ public class Main extends Activity {
 		}
 	}
 
-	private OnClickListener listener = new OnClickListener(){
+	private OnClickListener listener = new OnClickListener() {
 		@Override
 		public void onClick(View view) {
-			switch (view.getId()){
+			switch (view.getId()) {
 			case R.id.btncall:
 				startActivity(new Intent(Intent.ACTION_DIAL));
 				break;
@@ -171,7 +171,7 @@ public class Main extends Activity {
 				R.id.sharingLabel,
 				R.id.helpLabel,
 				R.id.servalLabel,
-			};
+		};
 		for (int i = 0; i < listenTo.length; i++) {
 			this.findViewById(listenTo[i]).setOnClickListener(listener);
 		}
@@ -277,10 +277,25 @@ public class Main extends Activity {
 		// startActivity(prepintent);
 
 		Identity main = Identity.getMainIdentity();
-		if (main == null || AccountService.getAccount(this) == null
-				|| main.getDid() == null) {
+		if (main == null) {
 			Log.v("MAIN",
-					"Keyring doesn't seem to be initialised, starting wizard");
+					"Keyring doesn't seem to be initialised, starting wizard :: main is null");
+
+			this.startActivity(new Intent(this, Wizard.class));
+			finish();
+			return;
+		}
+		if (AccountService.getAccount(this) == null) {
+			Log.v("MAIN",
+					"Keyring doesn't seem to be initialised, starting wizard :: AccountService.getAccount(this) == null");
+
+			this.startActivity(new Intent(this, Wizard.class));
+			finish();
+			return;
+		}
+		if (main.getDid() == null) {
+			Log.v("MAIN",
+					"Keyring doesn't seem to be initialised, starting wizard :: main.getDid() == null");
 
 			this.startActivity(new Intent(this, Wizard.class));
 			finish();

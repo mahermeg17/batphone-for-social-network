@@ -19,17 +19,9 @@
  */
 package org.servalproject;
 
-import android.app.Activity;
-import android.app.ListActivity;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.SystemClock;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.servalproject.batphone.CallHandler;
 import org.servalproject.servald.AbstractId.InvalidHexException;
@@ -42,9 +34,17 @@ import org.servalproject.servald.PeerListService;
 import org.servalproject.servald.ServalD;
 import org.servalproject.servald.SubscriberId;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import android.app.Activity;
+import android.app.ListActivity;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.SystemClock;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 
 /**
  *
@@ -68,6 +68,7 @@ public class PeerList extends ListActivity {
 	public static final String DID = "org.servalproject.PeerList.did";
 	public static final String SID = "org.servalproject.PeerList.sid";
 	public static final String NAME = "org.servalproject.PeerList.name";
+	public static final String PROFILE_DATA = "org.servalproject.PeerList.profileData";
 	public static final String RESOLVED = "org.servalproject.PeerList.resolved";
 
 	private boolean returnResult = false;
@@ -108,6 +109,7 @@ public class PeerList extends ListActivity {
 						returnIntent.putExtra(CONTACT_ID, p.contactId);
 						returnIntent.putExtra(DID, p.did);
 						returnIntent.putExtra(NAME, p.name);
+						returnIntent.putExtra(PROFILE_DATA, p.profileData);
 						returnIntent.putExtra(RESOLVED,
 								p.cacheUntil > SystemClock.elapsedRealtime());
 						setResult(Activity.RESULT_OK, returnIntent);

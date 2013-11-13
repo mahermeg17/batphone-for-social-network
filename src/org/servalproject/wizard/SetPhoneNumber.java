@@ -28,6 +28,15 @@
  **/
 package org.servalproject.wizard;
 
+import java.util.List;
+
+import org.servalproject.Main;
+import org.servalproject.R;
+import org.servalproject.ServalBatPhoneApplication;
+import org.servalproject.ServalBatPhoneApplication.State;
+import org.servalproject.account.AccountService;
+import org.servalproject.servald.Identity;
+
 import android.accounts.Account;
 import android.accounts.AccountAuthenticatorResponse;
 import android.accounts.AccountManager;
@@ -47,15 +56,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import org.servalproject.Main;
-import org.servalproject.R;
-import org.servalproject.ServalBatPhoneApplication;
-import org.servalproject.ServalBatPhoneApplication.State;
-import org.servalproject.account.AccountService;
-import org.servalproject.servald.Identity;
-
-import java.util.List;
-
 public class SetPhoneNumber extends Activity {
 	ServalBatPhoneApplication app;
 
@@ -69,10 +69,10 @@ public class SetPhoneNumber extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app=(ServalBatPhoneApplication)this.getApplication();
+		app = (ServalBatPhoneApplication) this.getApplication();
 
 		setContentView(R.layout.set_phone_no);
-		number = (EditText)this.findViewById(R.id.batphoneNumberText);
+		number = (EditText) this.findViewById(R.id.batphoneNumberText);
 		number.setSelectAllOnFocus(true);
 
 		name = (EditText) this.findViewById(R.id.batphoneNameText);
@@ -93,7 +93,8 @@ public class SetPhoneNumber extends Activity {
 						try {
 							identity.setDetails(app,
 									number.getText().toString(),
-									name.getText().toString());
+									name.getText().toString(),
+									"no data set");
 
 							// create the serval android acount if it doesn't
 							// already exist
@@ -143,7 +144,7 @@ public class SetPhoneNumber extends Activity {
 					@Override
 					protected void onPostExecute(Boolean result) {
 						if (result) {
-                            app.mainIdentityUpdated(identity);
+							app.mainIdentityUpdated(identity);
 							Intent intent = new Intent(SetPhoneNumber.this,
 									Main.class);
 							intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
