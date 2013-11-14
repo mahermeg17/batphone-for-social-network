@@ -36,7 +36,7 @@ import android.util.Log;
 
 /**
  * Low-level class for invoking servald JNI command-line operations.
- *
+ * 
  * @author Andrew Bettison <andrew@servalproject.com>
  */
 public class ServalD
@@ -55,7 +55,7 @@ public class ServalD
 
 	/**
 	 * Low-level JNI entry point into servald command line.
-	 *
+	 * 
 	 * @param outv
 	 *            A list to which the output fields will be appended using add()
 	 * @param args
@@ -67,7 +67,7 @@ public class ServalD
 
 	/**
 	 * Common entry point into servald command line.
-	 *
+	 * 
 	 * @param callback
 	 *            Each result will be passed to callback.result(String)
 	 *            immediately.
@@ -87,7 +87,7 @@ public class ServalD
 
 	/**
 	 * Common entry point into servald command line.
-	 *
+	 * 
 	 * @param args
 	 *            The parameters as passed on the command line, eg: res =
 	 *            servald.command("config", "set", "debug", "peers");
@@ -117,7 +117,7 @@ public class ServalD
 
 	/**
 	 * Start the servald server process if it is not already running.
-	 *
+	 * 
 	 * @author Andrew Bettison <andrew@servalproject.com>
 	 */
 	public static void serverStart(String execPath)
@@ -138,7 +138,7 @@ public class ServalD
 
 	/**
 	 * Stop the servald server process if it is running.
-	 *
+	 * 
 	 * @author Andrew Bettison <andrew@servalproject.com>
 	 */
 	public static void serverStop() throws ServalDFailureException,
@@ -154,7 +154,7 @@ public class ServalD
 
 	/**
 	 * Query the servald server process status.
-	 *
+	 * 
 	 * @return True if the process is running
 	 * @author Andrew Bettison <andrew@servalproject.com>
 	 */
@@ -173,7 +173,7 @@ public class ServalD
 
 	/**
 	 * The result of a lookup operation.
-	 *
+	 * 
 	 * @author Andrew Bettison <andrew@servalproject.com>
 	 */
 	protected static class LookupResult extends ServalDResult {
@@ -193,10 +193,10 @@ public class ServalD
 
 		/**
 		 * Unpack a result from a keyring add operation.
-		 *
+		 * 
 		 * @param result
 		 *            The result object returned by the operation.
-		 *
+		 * 
 		 * @author Andrew Bettison <andrew@servalproject.com>
 		 */
 		protected LookupResult(ServalDResult result)
@@ -218,7 +218,7 @@ public class ServalD
 
 	/**
 	 * The result of a keyring add operation.
-	 *
+	 * 
 	 * @author Andrew Bettison <andrew@servalproject.com>
 	 */
 	protected static class KeyringAddResult extends LookupResult {
@@ -229,10 +229,10 @@ public class ServalD
 
 		/**
 		 * Unpack a result from a keyring add operation.
-		 *
+		 * 
 		 * @param result
 		 *            The result object returned by the operation.
-		 *
+		 * 
 		 * @author Andrew Bettison <andrew@servalproject.com>
 		 */
 		protected KeyringAddResult(ServalDResult result)
@@ -274,7 +274,7 @@ public class ServalD
 
 	/**
 	 * The result of a keyring list.
-	 *
+	 * 
 	 * @author Andrew Bettison <andrew@servalproject.com>
 	 */
 	protected static class KeyringListResult extends ServalDResult {
@@ -303,10 +303,10 @@ public class ServalD
 
 		/**
 		 * Unpack a result from a keyring list output.
-		 *
+		 * 
 		 * @param result
 		 *            The result object returned by the operation.
-		 *
+		 * 
 		 * @author Andrew Bettison <andrew@servalproject.com>
 		 */
 		protected KeyringListResult(ServalDResult result)
@@ -395,7 +395,7 @@ public class ServalD
 
 	/**
 	 * The result of any rhizome operation that involves a payload.
-	 *
+	 * 
 	 * @author Andrew Bettison <andrew@servalproject.com>
 	 */
 	protected static class PayloadResult extends ServalDResult {
@@ -413,10 +413,10 @@ public class ServalD
 		/**
 		 * Unpack a result from a rhizome operation that describes a payload
 		 * file.
-		 *
+		 * 
 		 * @param result
 		 *            The result object returned by the operation.
-		 *
+		 * 
 		 * @author Andrew Bettison <andrew@servalproject.com>
 		 */
 		protected PayloadResult(ServalDResult result)
@@ -431,7 +431,7 @@ public class ServalD
 
 	/**
 	 * Add a payload file to the rhizome store, with author identity (SID).
-	 *
+	 * 
 	 * @param path
 	 *            The path of the file containing the payload. The name is taken
 	 *            from the path's basename. If path is null, then it means an
@@ -448,7 +448,7 @@ public class ServalD
 	 * @param pin
 	 *            The pin to unlock the author's rhizome secret.
 	 * @return PayloadResult
-	 *
+	 * 
 	 * @author Andrew Bettison <andrew@servalproject.com>
 	 */
 	public static RhizomeAddFileResult rhizomeAddFile(File payloadPath,
@@ -541,13 +541,13 @@ public class ServalD
 
 	/**
 	 * Export a manifest into a file at the given path.
-	 *
+	 * 
 	 * @param manifestId
 	 *            The manifest ID of the manifest to extract.
 	 * @param path
 	 *            The path of the file into which the manifest is to be written.
 	 * @return RhizomeExtractManifestResult
-	 *
+	 * 
 	 * @author Andrew Bettison <andrew@servalproject.com>
 	 */
 	public static RhizomeExtractManifestResult rhizomeExportManifest(
@@ -614,13 +614,13 @@ public class ServalD
 
 	/**
 	 * Extract a payload file into a file at the given path.
-	 *
+	 * 
 	 * @param fileHash
 	 *            The hash (file ID) of the file to extract.
 	 * @param path
 	 *            The path of the file into which the payload is to be written.
 	 * @return RhizomeExtractFileResult
-	 *
+	 * 
 	 * @author Andrew Bettison <andrew@servalproject.com>
 	 */
 	public static RhizomeExtractFileResult rhizomeExtractFile(BundleId bid,
@@ -634,7 +634,7 @@ public class ServalD
 
 	/**
 	 * Push Rhizome bundles to all configured direct hosts.
-	 *
+	 * 
 	 * @author Andrew Bettison <andrew@servalproject.com>
 	 */
 	public static void rhizomeDirectPush() throws ServalDFailureException,
@@ -646,7 +646,7 @@ public class ServalD
 
 	/**
 	 * Pull Rhizome bundles from all configured direct hosts.
-	 *
+	 * 
 	 * @author Andrew Bettison <andrew@servalproject.com>
 	 */
 	public static void rhizomeDirectPull() throws ServalDFailureException,
@@ -658,7 +658,7 @@ public class ServalD
 
 	/**
 	 * Sync (push and pull) Rhizome bundles from all configured direct hosts.
-	 *
+	 * 
 	 * @author Andrew Bettison <andrew@servalproject.com>
 	 */
 	public static void rhizomeDirectSync() throws ServalDFailureException,
