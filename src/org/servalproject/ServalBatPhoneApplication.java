@@ -32,6 +32,34 @@
 
 package org.servalproject;
 
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.security.SecureRandom;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import org.servalproject.batphone.CallHandler;
+import org.servalproject.rhizome.MeshMS;
+import org.servalproject.rhizome.Rhizome;
+import org.servalproject.servald.BundleId;
+import org.servalproject.servald.Identity;
+import org.servalproject.servald.ServalD;
+import org.servalproject.servald.ServalD.RhizomeManifestResult;
+import org.servalproject.servald.ServalDMonitor;
+import org.servalproject.shell.Shell;
+import org.servalproject.system.BluetoothService;
+import org.servalproject.system.ChipsetDetection;
+import org.servalproject.system.CoreTask;
+import org.servalproject.system.NetworkManager;
+
 import android.app.Application;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -54,34 +82,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.servalproject.batphone.CallHandler;
-import org.servalproject.rhizome.MeshMS;
-import org.servalproject.rhizome.Rhizome;
-import org.servalproject.servald.BundleId;
-import org.servalproject.servald.Identity;
-import org.servalproject.servald.ServalD;
-import org.servalproject.servald.ServalD.RhizomeManifestResult;
-import org.servalproject.servald.ServalDMonitor;
-import org.servalproject.shell.Shell;
-import org.servalproject.system.BluetoothService;
-import org.servalproject.system.ChipsetDetection;
-import org.servalproject.system.CoreTask;
-import org.servalproject.system.NetworkManager;
-
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.security.SecureRandom;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 public class ServalBatPhoneApplication extends Application {
 
@@ -192,8 +192,17 @@ public class ServalBatPhoneApplication extends Application {
 		setState(State.Off);
 
 		List<Identity> identities = Identity.getIdentities();
-		if (identities.size() >= 1)
+		if (identities.size() >= 1) {
+			Log.e("ServalBatPhoneApplication", "getDid::"
+					+ identities.get(0).getDid());
+			Log.e("ServalBatPhoneApplication", "getName::"
+					+ identities.get(0).getName());
+			Log.e("ServalBatPhoneApplication", "getProfileData::"
+					+ identities.get(0).getProfileData());
             mainIdentityUpdated(identities.get(0));
+		} else {
+			Log.e("ServalBatPhoneApplication", "no identities");
+		}
 
         // Bluetooth-Service
         this.bluetoothService = BluetoothService.getInstance();
