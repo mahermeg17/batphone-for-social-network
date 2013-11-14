@@ -74,7 +74,7 @@ public class Identity {
 	}
 
 	public String getProfileData() {
-		return profileData == null ? "" : profileData;
+		return profileData;
 	}
 
 	public void setProfileData(String profileData) {

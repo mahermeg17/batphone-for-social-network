@@ -79,9 +79,13 @@ public class AccountsSettingsActivity extends Activity {
 			SIDid = ("There is no ServalID to display");
 
 		if (accountID.getName() != null)
-			NMid = accountID.getName() + "::" + accountID.getProfileData();
+			NMid = accountID.getName();
 		else
-			NMid = ("There is no name to display");
+			NMid = ("no name to display");
+		if (accountID.getProfileData() != null)
+			NMid += accountID.getProfileData();
+		else
+			NMid += (" :: no profile to display");
 
 		// set values to display
 		acPN.setText(PNid); // Phone number
